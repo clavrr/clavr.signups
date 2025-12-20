@@ -2,7 +2,6 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Countdown from "@/components/Countdown";
 import BackgroundBubbles from "@/components/BackgroundBubbles";
-import Integrations from "@/components/Integrations";
 import Footer from "@/components/Footer";
 
 export default function Home() {
