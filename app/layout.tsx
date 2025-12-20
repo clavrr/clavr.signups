@@ -13,8 +13,9 @@ export const metadata: Metadata = {
         default: "Clavr - Your OS for Productivity | Join the Private Beta",
         template: "%s | Clavr"
     },
-    description: "Clavr is the AI brain your productivity stack was missing. Autonomous, private, and personalized. Connect your tools, let Clavr handle the rest. Join the private beta today.",
+    description: "Clavr is an autonomous agent that converts natural language into reliable, cross-platform actions across your productivity stack. It's the intelligent layer that sits on top of Gmail, Calendar, Tasks, Slack, Notion, Asana, and Google Drive—making them work together autonomously.",
     keywords: [
+        "memory",
         "autonomous",
         "speed",
         "privacy",
@@ -22,7 +23,6 @@ export const metadata: Metadata = {
         "intelligence",
         "remembers",
         "learns",
-        "memory",
         "personalized",
         "productivity",
         "Clavr"
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: "https://clavr.me",
         siteName: "Clavr",
         title: "Clavr - Your OS for Productivity",
-        description: "The AI brain your productivity stack was missing. Autonomous, private, and personalized. Join the private beta.",
+        description: "Clavr is an autonomous agent that converts natural language into reliable, cross-platform actions. Works with Gmail, Calendar, Slack, Notion, Asana & Drive.",
         images: [
             {
                 url: "/og-image.png",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Clavr - Your OS for Productivity",
-        description: "The AI brain your productivity stack was missing. Join the private beta.",
+        description: "An autonomous agent that converts natural language into actions across Gmail, Calendar, Slack, Notion, Asana & Drive.",
         images: ["/og-image.png"],
         creator: "@clavrAI",
     },
