@@ -40,9 +40,9 @@ export default function BackgroundBubbles({ className }: { className?: string })
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
-        // Fewer bubbles on mobile for smoother movement - 10 on mobile, 28 on desktop
+        // Use ALL 14 base images on mobile, 28 (duplicated) on desktop
         const allImages = [...baseImages, ...baseImages];
-        const images = isMobile ? allImages.slice(0, 10) : allImages;
+        const images = isMobile ? baseImages : allImages;  // Mobile: 14 images, Desktop: 28
 
         const w = window.innerWidth;
         const h = window.innerHeight;
