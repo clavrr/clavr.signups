@@ -40,25 +40,26 @@ export default function BackgroundBubbles({ className }: { className?: string })
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
-        // Fewer bubbles on mobile for smoother movement - 12 on mobile, 28 on desktop
+        // Fewer bubbles on mobile for smoother movement - 10 on mobile, 28 on desktop
         const allImages = [...baseImages, ...baseImages];
-        const images = isMobile ? allImages.slice(0, 12) : allImages;
+        const images = isMobile ? allImages.slice(0, 10) : allImages;
 
         const w = window.innerWidth;
         const h = window.innerHeight;
-        // Bubbles can move in the entire hero section on mobile
-        // More vertical room on mobile for free movement
-        const minY = isMobile ? 80 : 120;      // Below navbar
-        const maxY = isMobile ? h * 0.85 : h * 0.55;  // Mobile: most of screen, Desktop: top 55%
+        // MOBILE: Bubbles can go in top portion including behind the big "Clavr" text
+        // But they must avoid the two specific sentences below Clavr
+        const minY = isMobile ? 80 : 120;       // Below navbar
+        // MOBILE: maxY at 36% allows bubbles behind:
+        // - Navbar area (top)
+        // - "Join the Private Beta" badge (~25%)
+        // - "Clavr" logo (~28-35%)
+        // But STOPS bubbles BEFORE:
+        // - "Where Conversations fuel..." (~38%+)
+        // - "The brain your productivity..." (~46%+)
+        const maxY = isMobile ? h * 0.36 : h * 0.55;
 
-        // Two narrow exclusion zones for mobile - ONLY the two text sentences
-        // Zone 1: "Where Conversations fuel [dynamic text]" 
-        // Zone 2: "The brain your productivity stack was missing."
-        // Bubbles CAN go behind: Clavr logo, Join Private Beta, signup form, countdown
-        const textExclusionZones = isMobile ? [
-            { minX: w * 0.08, maxX: w * 0.92, minY: h * 0.52, maxY: h * 0.62 },  // "Where Conversations fuel..."
-            { minX: w * 0.08, maxX: w * 0.92, minY: h * 0.64, maxY: h * 0.72 }   // "The brain your productivity..."
-        ] : [];
+        // No exclusion zones needed - maxY prevents bubbles from reaching the protected text
+        const textExclusionZones: { minX: number; maxX: number; minY: number; maxY: number }[] = [];
 
         screenRef.current = { w, h, isMobile, minY, maxY, textExclusionZones };
 
