@@ -9,7 +9,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-black hover:text-blue-600 transition-all duration-300 hover:scale-110"
             >
-                <Linkedin className="w-16 h-16 md:w-20 md:h-20" strokeWidth={0.8} />
+                <Linkedin className="w-12 h-12 md:w-20 md:h-20" strokeWidth={0.8} />
             </a>
         </footer>
     );

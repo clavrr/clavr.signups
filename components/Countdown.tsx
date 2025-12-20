@@ -12,7 +12,7 @@ export default function Countdown() {
     });
 
     useEffect(() => {
-        const targetDate = new Date("2026-01-18T00:00:00");
+        const targetDate = new Date("2026-01-10T00:00:00");
 
         const updateCountdown = () => {
             const now = new Date();
@@ -51,7 +51,7 @@ export default function Countdown() {
                 {timeUnits.map((unit) => (
                     <div key={unit.label} className="flex flex-col items-center">
                         <div className="border border-black/5 rounded-lg sm:rounded-xl px-3 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 min-w-[64px] sm:min-w-[72px] md:min-w-[88px] bg-white/10 backdrop-blur-sm">
-                            <span className="block text-2xl sm:text-3xl md:text-4xl font-semibold text-black tabular-nums text-center">
+                            <span className="block text-4xl sm:text-4xl md:text-5xl font-semibold text-black tabular-nums text-center">
                                 {unit.value}
                             </span>
                         </div>

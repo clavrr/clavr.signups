@@ -74,12 +74,15 @@ export default function BackgroundBubbles({ className }: { className?: string })
             const y = minY + Math.random() * (maxY - minY - radius * 2);
             const dir = Math.random() > 0.5 ? 1 : -1;
 
+            // Mobile bubbles move slower than desktop
+            const speedMultiplier = isMobile ? 0.4 : 1.0;
+
             return {
                 id: i,
                 x,
                 y,
-                vx: (0.5 + Math.random() * 0.5) * dir,  // 0.5 to 1.0 px/frame
-                vy: (Math.random() - 0.5) * 0.3,        // -0.15 to 0.15 px/frame
+                vx: (0.5 + Math.random() * 0.5) * dir * speedMultiplier,  // Mobile: 0.2-0.4, Desktop: 0.5-1.0
+                vy: (Math.random() - 0.5) * 0.3 * speedMultiplier,        // Slower vertical too
                 radius,
                 word: data.word,
                 bgColor: data.bgColor,
