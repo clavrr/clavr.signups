@@ -1,0 +1,52 @@
+.countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.timer {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeUnit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.value {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #666666;
+    letter-spacing: 0.1em;
+}
+
+.label {
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: #333333;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.untilBeta {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #222222;
+    letter-spacing: 0.2em;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .timer {
+        gap: 1.5rem;
+    }
+
+    .value {
+        font-size: 1rem;
+    }
+}

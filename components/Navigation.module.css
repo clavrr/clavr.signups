@@ -1,0 +1,39 @@
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.logoIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.links a {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: #888888;
+    transition: color 0.2s ease;
+}
+
+.links a:hover {
+    color: #ffffff;
+}

@@ -1,0 +1,80 @@
+.integrations {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.iconsContainer {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconCircle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.iconCircle:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.iconImage {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.connector {
+    margin-top: 0;
+    opacity: 0.4;
+}
+
+.hub {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hubLogo {
+    background: #000000;
+    padding: 0.75rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+    .iconsContainer {
+        gap: 1.5rem;
+    }
+
+    .iconCircle {
+        width: 28px;
+        height: 28px;
+    }
+}
