@@ -51,12 +51,13 @@ export default function BackgroundBubbles({ className }: { className?: string })
         const minY = isMobile ? 100 : 120;     // Below navbar
         const maxY = h * 0.55;                   // Top 55% of screen only
 
-        // Center exclusion zone for mobile - protect the text area
+        // Center exclusion zone for mobile - protect the two text lines
+        // This creates a rectangular "safe zone" where bubbles cannot go
         const centerExclusion = isMobile ? {
-            minX: w * 0.1,   // Left 10% to right 90%
-            maxX: w * 0.9,
-            minY: h * 0.28,  // Vertical center zone where text is
-            maxY: h * 0.45
+            minX: w * 0.05,   // 5% padding from edges
+            maxX: w * 0.95,
+            minY: h * 0.22,   // From above "Where Conversations fuel..."
+            maxY: h * 0.52    // To below "The brain your productivity stack was missing."
         } : { minX: 0, maxX: 0, minY: 0, maxY: 0 };
 
         screenRef.current = { w, h, isMobile, minY, maxY, centerExclusion };
