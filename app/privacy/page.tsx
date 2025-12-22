@@ -5,9 +5,9 @@ import { ArrowLeft, Shield, Mail, Lock, Users, Database, Eye, Trash2, Cookie, Ba
 
 export default function PrivacyPolicy() {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 pt-20 pb-16 px-4 md:px-8">
+        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 pt-24 pb-16 px-4 md:px-8">
             {/* Sticky Back Button */}
-            <div className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/0">
+            <div className="fixed top-0 left-0 right-0 z-50 py-5 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/0">
                 <div className="max-w-2xl mx-auto">
                     <Link
                         href="/"
@@ -22,7 +22,7 @@ export default function PrivacyPolicy() {
             <div className="max-w-2xl mx-auto">
                 {/* Header Card */}
                 <div className="clay-card p-8 mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+                    <h1 className="text-3xl font-bold text-black mb-2">Privacy Policy</h1>
                     <p className="text-gray-400 text-sm">Last updated: November 1, 2025</p>
                 </div>
 
