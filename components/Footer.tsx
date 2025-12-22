@@ -29,7 +29,7 @@ export default function Footer() {
                     href="/use"
                     className="text-gray-600 hover:text-black text-sm transition-colors duration-300"
                 >
-                    Terms of Use
+                    Use
                 </Link>
             </div>
         </footer>
