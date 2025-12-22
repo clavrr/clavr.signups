@@ -5,13 +5,13 @@ import { ArrowLeft, FileText, UserCheck, Shield, Ban, Cpu, AlertTriangle, Copyri
 
 export default function TermsOfUse() {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 pt-24 pb-16 px-4 md:px-8">
+        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 pt-16 md:pt-24 pb-8 md:pb-16 px-3 md:px-8">
             {/* Sticky Back Button */}
-            <div className="fixed top-0 left-0 right-0 z-50 py-5 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/0">
+            <div className="fixed top-0 left-0 right-0 z-50 py-3 md:py-5 px-3 md:px-8 bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/0">
                 <div className="max-w-2xl mx-auto">
                     <Link
                         href="/"
-                        className="clay-back-btn inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm px-4 py-2 transition-colors group"
+                        className="clay-back-btn inline-flex items-center gap-1.5 md:gap-2 text-gray-600 hover:text-gray-900 text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2 transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                         Back
@@ -21,13 +21,13 @@ export default function TermsOfUse() {
 
             <div className="max-w-2xl mx-auto">
                 {/* Header Card */}
-                <div className="clay-card p-8 mb-8">
-                    <h1 className="text-4xl font-bold mb-2" style={{ color: '#000000' }}>Terms of Use</h1>
-                    <p className="text-gray-400 text-base">Last updated: November 1, 2025</p>
+                <div className="clay-card p-5 md:p-8 mb-5 md:mb-8">
+                    <h1 className="text-2xl md:text-4xl font-bold mb-1 md:mb-2" style={{ color: '#000000' }}>Terms of Use</h1>
+                    <p className="text-gray-400 text-sm md:text-base">Last updated: November 1, 2025</p>
                 </div>
 
                 {/* Main Content */}
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                     <Section icon={<FileText className="w-5 h-5" />} title="1. Overview">
                         <p className="mb-3">
                             Welcome to Clavr, Inc. (&quot;Clavr,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). These Terms of Use govern your access to and use of Clavr&apos;s products, software, services, websites, and applications (collectively, the &quot;Services&quot;).
@@ -189,15 +189,15 @@ export default function TermsOfUse() {
                 </div>
 
                 {/* Summary Card */}
-                <div className="clay-card-highlight p-6 mt-8">
-                    <p className="text-gray-700 text-base leading-relaxed">
+                <div className="clay-card-highlight p-4 md:p-6 mt-5 md:mt-8">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                         <strong>Quick Summary:</strong> Use Clavr responsibly for workflow orchestration and productivity automation, keep your account secure, review AI-orchestrated actions before execution, don&apos;t spam or break laws, and understand that you&apos;re responsible for all actions taken through your account—whether emails sent, tasks created, meetings scheduled, or messages sent.
                     </p>
                 </div>
 
                 {/* Footer */}
-                <div className="mt-12 pt-6 text-center">
-                    <Link href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 text-sm transition-colors group">
+                <div className="mt-8 md:mt-12 pt-4 md:pt-6 text-center">
+                    <Link href="/" className="inline-flex items-center gap-1.5 md:gap-2 text-gray-500 hover:text-gray-900 text-xs md:text-sm transition-colors group">
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                         Back to Clavr
                     </Link>
@@ -275,14 +275,14 @@ export default function TermsOfUse() {
 
 function Section({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
     return (
-        <div className="clay-section p-5">
-            <div className="flex items-start gap-4">
-                <div className="clay-icon p-2.5 text-gray-600 shrink-0">
+        <div className="clay-section p-3 md:p-5">
+            <div className="flex items-start gap-3 md:gap-4">
+                <div className="clay-icon p-2 md:p-2.5 text-gray-600 shrink-0">
                     {icon}
                 </div>
                 <div>
-                    <h2 className="text-lg font-semibold text-black mb-2">{title}</h2>
-                    <div className="text-gray-700 text-base leading-relaxed [&_ul]:list-disc [&_ul]:ml-4 [&_li]:pl-1">
+                    <h2 className="text-base md:text-lg font-semibold text-black mb-1.5 md:mb-2">{title}</h2>
+                    <div className="text-gray-700 text-sm md:text-base leading-relaxed [&_ul]:list-disc [&_ul]:ml-4 [&_li]:pl-1">
                         {children}
                     </div>
                 </div>
