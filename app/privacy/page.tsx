@@ -22,8 +22,8 @@ export default function PrivacyPolicy() {
             <div className="max-w-2xl mx-auto">
                 {/* Header Card */}
                 <div className="clay-card p-8 mb-8">
-                    <h1 className="text-3xl font-bold text-black mb-2">Privacy Policy</h1>
-                    <p className="text-gray-400 text-sm">Last updated: November 1, 2025</p>
+                    <h1 className="text-4xl font-bold mb-2" style={{ color: '#000000' }}>Privacy Policy</h1>
+                    <p className="text-gray-400 text-base">Last updated: November 1, 2025</p>
                 </div>
 
                 {/* Main Content */}
@@ -123,7 +123,7 @@ export default function PrivacyPolicy() {
 
                 {/* Summary Card */}
                 <div className="clay-card-highlight p-6 mt-8">
-                    <p className="text-gray-700 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-base leading-relaxed">
                         <strong>Summary:</strong> We access your emails only with permission, don&apos;t store them, passed Google&apos;s security checks, encrypt everything, never share your data, and you can delete anytime.
                     </p>
                 </div>
@@ -214,8 +214,8 @@ function Section({ icon, title, children }: { icon: React.ReactNode; title: stri
                     {icon}
                 </div>
                 <div>
-                    <h2 className="text-base font-semibold text-gray-900 mb-2">{title}</h2>
-                    <div className="text-gray-600 text-sm leading-relaxed [&_ul]:list-disc [&_ul]:ml-4 [&_li]:pl-1">
+                    <h2 className="text-lg font-semibold text-black mb-2">{title}</h2>
+                    <div className="text-gray-700 text-base leading-relaxed [&_ul]:list-disc [&_ul]:ml-4 [&_li]:pl-1">
                         {children}
                     </div>
                 </div>
