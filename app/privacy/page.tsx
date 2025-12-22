@@ -1,136 +1,203 @@
+"use client";
+
 import Link from "next/link";
+import { ArrowLeft, Shield, Mail, Lock, Users, Database, Eye, Trash2, Cookie, Baby, Bell } from "lucide-react";
 
 export default function PrivacyPolicy() {
     return (
-        <main className="min-h-screen bg-white text-gray-900 py-12 px-4 md:px-8">
+        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-16 px-4 md:px-8">
             <div className="max-w-2xl mx-auto">
                 <Link
                     href="/"
-                    className="text-gray-500 hover:text-black text-sm mb-8 inline-block"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 text-sm mb-10 transition-colors group"
                 >
-                    ← Back
+                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                    Back
                 </Link>
 
-                <h1 className="text-3xl font-bold mb-1">Privacy Policy</h1>
-                <p className="text-gray-400 text-sm mb-10">Last updated: November 1, 2025</p>
+                {/* Header Card */}
+                <div className="clay-card p-8 mb-8">
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+                    <p className="text-gray-400 text-sm">Last updated: November 1, 2025</p>
+                </div>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Your Privacy Matters</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        At Clavr, we take your privacy seriously. We built our autonomous intelligent productivity platform with privacy and security at the core.
-                    </p>
-                </section>
+                {/* Main Content */}
+                <div className="space-y-6">
+                    <Section icon={<Shield className="w-5 h-5" />} title="Your Privacy Matters">
+                        <p>
+                            At Clavr, we take your privacy seriously. We built our autonomous intelligent productivity platform with privacy and security at the core.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Data We Access</h2>
-                    <p className="text-gray-600 text-sm mb-3">All access is granted only with your explicit permission:</p>
-                    <ul className="text-gray-600 text-sm space-y-1 ml-4 list-disc">
-                        <li>Email messages you explicitly grant access to</li>
-                        <li>Sent emails (to learn your writing style)</li>
-                        <li>Google Calendar events</li>
-                        <li>Google Tasks</li>
-                        <li>Slack messages and channels</li>
-                        <li>Notion pages and databases</li>
-                        <li>Basic account information</li>
-                    </ul>
-                </section>
+                    <Section icon={<Database className="w-5 h-5" />} title="Data We Access">
+                        <p className="mb-3">All access is granted only with your explicit permission:</p>
+                        <ul className="space-y-2">
+                            <li>Email messages you explicitly grant access to</li>
+                            <li>Sent emails (to learn your writing style)</li>
+                            <li>Google Calendar events</li>
+                            <li>Google Tasks</li>
+                            <li>Slack messages and channels</li>
+                            <li>Notion pages and databases</li>
+                            <li>Basic account information</li>
+                        </ul>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">How We Handle Your Emails</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        <strong>We don&apos;t store your emails.</strong> Emails are fetched in real-time, processed for context, and not kept. We only store minimal metadata needed for the service.
-                    </p>
-                </section>
+                    <Section icon={<Mail className="w-5 h-5" />} title="How We Handle Your Emails">
+                        <p>
+                            <strong>We don&apos;t store your emails.</strong> Emails are fetched in real-time, processed for context, and not kept. We only store minimal metadata needed for the service.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Third-Party Integrations</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                        For Google Calendar, Slack, and Notion: we access data only with your permission, process it in real-time, and don&apos;t store it permanently. You can revoke access anytime.
-                    </p>
-                </section>
+                    <Section icon={<Users className="w-5 h-5" />} title="Third-Party Integrations">
+                        <p>
+                            For Google Calendar, Slack, and Notion: we access data only with your permission, process it in real-time, and don&apos;t store it permanently. You can revoke access anytime.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Google Security Verification</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        Clavr has passed Google&apos;s extensive security checks and maintains compliance with Google&apos;s API Services User Data Policy.
-                    </p>
-                </section>
+                    <Section icon={<Shield className="w-5 h-5" />} title="Google Security Verification">
+                        <p>
+                            Clavr has passed Google&apos;s extensive security checks and maintains compliance with Google&apos;s API Services User Data Policy.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">What We Store</h2>
-                    <ul className="text-gray-600 text-sm space-y-1 ml-4 list-disc">
-                        <li>Writing style profile (patterns, not content)</li>
-                        <li>User preferences and settings</li>
-                        <li>Usage data</li>
-                        <li>Tasks and reminders you create</li>
-                    </ul>
-                </section>
+                    <Section icon={<Database className="w-5 h-5" />} title="What We Store">
+                        <ul className="space-y-2">
+                            <li>Writing style profile (patterns, not content)</li>
+                            <li>User preferences and settings</li>
+                            <li>Usage data</li>
+                            <li>Tasks and reminders you create</li>
+                        </ul>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Data Encryption</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        All data is encrypted in transit (TLS/SSL) and at rest (AES-256).
-                    </p>
-                </section>
+                    <Section icon={<Lock className="w-5 h-5" />} title="Data Encryption">
+                        <p>
+                            All data is encrypted in transit (TLS/SSL) and at rest (AES-256).
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">We Never Share Your Data</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        We will never sell, rent, or share your personal data with third parties for marketing. We only share when legally required or necessary for our service.
-                    </p>
-                </section>
+                    <Section icon={<Eye className="w-5 h-5" />} title="We Never Share Your Data">
+                        <p>
+                            We will never sell, rent, or share your personal data with third parties for marketing. We only share when legally required or necessary for our service.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Your Control</h2>
-                    <ul className="text-gray-600 text-sm space-y-1 ml-4 list-disc">
-                        <li>Revoke access anytime via Google Account settings</li>
-                        <li>Request deletion of all your data</li>
-                        <li>Export your data</li>
-                        <li>Review permissions</li>
-                    </ul>
-                </section>
+                    <Section icon={<Users className="w-5 h-5" />} title="Your Control">
+                        <ul className="space-y-2">
+                            <li>Revoke access anytime via Google Account settings</li>
+                            <li>Request deletion of all your data</li>
+                            <li>Export your data</li>
+                            <li>Review permissions</li>
+                        </ul>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Data Retention</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        Data is retained while your account is active. After cancellation, data is kept for 30 days then permanently deleted.
-                    </p>
-                </section>
+                    <Section icon={<Trash2 className="w-5 h-5" />} title="Data Retention">
+                        <p>
+                            Data is retained while your account is active. After cancellation, data is kept for 30 days then permanently deleted.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Cookies</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        We use minimal cookies for authentication and preferences. No tracking or advertising cookies.
-                    </p>
-                </section>
+                    <Section icon={<Cookie className="w-5 h-5" />} title="Cookies">
+                        <p>
+                            We use minimal cookies for authentication and preferences. No tracking or advertising cookies.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Children&apos;s Privacy</h2>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        Clavr is not intended for users under 13.
-                    </p>
-                </section>
+                    <Section icon={<Baby className="w-5 h-5" />} title="Children's Privacy">
+                        <p>
+                            Clavr is not intended for users under 13.
+                        </p>
+                    </Section>
 
-                <section className="mb-8">
-                    <h2 className="text-lg font-semibold mb-2">Contact</h2>
-                    <p className="text-gray-600 text-sm">
-                        Email: <a href="mailto:founders@clavr.me" className="text-gray-900 hover:underline">founders@clavr.me</a>
-                        <br />Redmond, WA, USA
-                    </p>
-                </section>
+                    <Section icon={<Bell className="w-5 h-5" />} title="Contact">
+                        <p>
+                            Email: <a href="mailto:founders@clavr.me" className="font-medium hover:underline">founders@clavr.me</a>
+                            <br />Redmond, WA, USA
+                        </p>
+                    </Section>
+                </div>
 
-                <section className="bg-gray-50 rounded-lg p-5 mt-10">
+                {/* Summary Card */}
+                <div className="clay-card-highlight p-6 mt-8">
                     <p className="text-gray-700 text-sm leading-relaxed">
                         <strong>Summary:</strong> We access your emails only with permission, don&apos;t store them, passed Google&apos;s security checks, encrypt everything, never share your data, and you can delete anytime.
                     </p>
-                </section>
+                </div>
 
-                <div className="mt-10 pt-6 border-t border-gray-100 text-center">
-                    <Link href="/" className="text-gray-500 hover:text-black text-sm">
-                        ← Back to Clavr
+                {/* Footer */}
+                <div className="mt-12 pt-6 text-center">
+                    <Link href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 text-sm transition-colors group">
+                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                        Back to Clavr
                     </Link>
                 </div>
             </div>
+
+            <style jsx>{`
+                .clay-card {
+                    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+                    border-radius: 24px;
+                    box-shadow: 
+                        8px 8px 20px rgba(0, 0, 0, 0.08),
+                        -8px -8px 20px rgba(255, 255, 255, 0.9),
+                        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+                        inset -1px -1px 2px rgba(0, 0, 0, 0.03);
+                }
+                
+                .clay-card-highlight {
+                    background: linear-gradient(145deg, #fafafa, #f5f5f5);
+                    border-radius: 20px;
+                    box-shadow: 
+                        6px 6px 16px rgba(0, 0, 0, 0.06),
+                        -6px -6px 16px rgba(255, 255, 255, 0.9),
+                        inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+                        inset -1px -1px 2px rgba(0, 0, 0, 0.02);
+                }
+                
+                .clay-section {
+                    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+                    border-radius: 20px;
+                    box-shadow: 
+                        5px 5px 15px rgba(0, 0, 0, 0.05),
+                        -5px -5px 15px rgba(255, 255, 255, 0.95),
+                        inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+                    transition: all 0.3s ease;
+                }
+                
+                .clay-section:hover {
+                    box-shadow: 
+                        7px 7px 18px rgba(0, 0, 0, 0.07),
+                        -7px -7px 18px rgba(255, 255, 255, 1),
+                        inset 1px 1px 1px rgba(255, 255, 255, 0.9);
+                    transform: translateY(-2px);
+                }
+                
+                .clay-icon {
+                    background: linear-gradient(145deg, #f8f8f8, #e8e8e8);
+                    border-radius: 12px;
+                    box-shadow: 
+                        3px 3px 8px rgba(0, 0, 0, 0.08),
+                        -3px -3px 8px rgba(255, 255, 255, 0.9),
+                        inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+                }
+            `}</style>
         </main>
+    );
+}
+
+function Section({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+    return (
+        <div className="clay-section p-5">
+            <div className="flex items-start gap-4">
+                <div className="clay-icon p-2.5 text-gray-600 shrink-0">
+                    {icon}
+                </div>
+                <div>
+                    <h2 className="text-base font-semibold text-gray-900 mb-2">{title}</h2>
+                    <div className="text-gray-600 text-sm leading-relaxed [&_ul]:list-disc [&_ul]:ml-4 [&_li]:pl-1">
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
