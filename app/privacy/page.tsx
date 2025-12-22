@@ -114,7 +114,7 @@ export default function PrivacyPolicy() {
                 <section className="mb-8">
                     <h2 className="text-lg font-semibold mb-2">Contact</h2>
                     <p className="text-gray-600 text-sm">
-                        Email: <a href="mailto:founders@clavr.me" className="text-blue-600 hover:underline">founders@clavr.me</a>
+                        Email: <a href="mailto:founders@clavr.me" className="text-gray-900 hover:underline">founders@clavr.me</a>
                         <br />Redmond, WA, USA
                     </p>
                 </section>
