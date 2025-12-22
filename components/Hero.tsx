@@ -19,7 +19,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="flex flex-col items-center justify-center text-center gap-6 md:gap-8 pt-12 md:pt-20 relative w-full mb-8 md:mb-12 z-20 pointer-events-none">
+        <section className="flex flex-col items-center justify-center text-center gap-4 md:gap-8 pt-8 md:pt-20 relative w-full mb-4 md:mb-12 z-20 pointer-events-none">
             <div className="pointer-events-auto">
                 <Badge
                     variant="outline"
@@ -57,7 +57,7 @@ export default function Hero() {
                 The brain your productivity stack was missing.
             </p>
 
-            <div className="mt-4 pointer-events-auto">
+            <div className="mt-2 pointer-events-auto">
                 <SignUpForm />
             </div>
         </section>

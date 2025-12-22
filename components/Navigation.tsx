@@ -7,7 +7,7 @@ export default function Navigation() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-xl">
             <div className="flex flex-col w-full">
                 {/* Top Spacer Buffer */}
-                <div className="h-6 md:h-12 w-full" />
+                <div className="h-3 md:h-12 w-full" />
 
                 <div className="flex items-center">
                     {/* Left Spacer Buffer - ONLY ON DESKTOP */}
@@ -19,7 +19,7 @@ export default function Navigation() {
                             alt="Clavr Logo"
                             width={140}
                             height={36}
-                            className="h-8 md:h-12 w-auto mb-8 md:mb-12"
+                            className="h-6 md:h-12 w-auto mb-4 md:mb-12"
                             priority
                         />
                     </div>
