@@ -81,12 +81,12 @@ export default function SignUpForm() {
         >
 
             {/* Main container */}
-            <div className="relative flex items-center w-[95%] sm:w-full mx-auto bg-black/5 border border-black/5 rounded-full p-1.5 sm:p-2 backdrop-blur-xl">
-                <div className="w-6 sm:w-8 shrink-0" />
+            <div className="relative flex items-center w-full max-w-lg mx-auto bg-black/5 border border-black/5 rounded-full p-1.5 sm:p-2 backdrop-blur-xl">
+                <div className="w-4 sm:w-6 shrink-0" />
                 <input
                     type="email"
                     placeholder="Enter your email"
-                    className="flex-1 h-12 sm:h-16 bg-transparent text-black text-base sm:text-lg placeholder:text-black/60 focus:outline-none"
+                    className="flex-1 min-w-0 h-10 sm:h-14 bg-transparent text-black text-sm sm:text-lg placeholder:text-black/60 focus:outline-none"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -94,12 +94,11 @@ export default function SignUpForm() {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="h-12 sm:h-16 bg-black text-white font-semibold transform-gpu text-sm sm:text-base hover:bg-black/90 transition-all duration-200 rounded-full shrink-0 shadow-lg flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
+                    className="h-10 sm:h-14 px-5 sm:px-10 bg-black text-white font-semibold transform-gpu text-xs sm:text-base hover:bg-black/90 transition-all duration-200 rounded-full shrink-0 shadow-lg flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
                 >
-                    <div className="w-10 sm:w-14 shrink-0" />
                     {isLoading ? (
                         <span className="flex items-center gap-2">
-                            <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
+                            <svg className="animate-spin h-3 w-3 sm:h-5 sm:w-5" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                             </svg>
@@ -109,7 +108,6 @@ export default function SignUpForm() {
                     ) : (
                         "Get early access"
                     )}
-                    <div className="w-10 sm:w-14 shrink-0" />
                 </button>
             </div>
 
@@ -118,8 +116,8 @@ export default function SignUpForm() {
                 {/* Success message */}
                 <div
                     className={`absolute inset-0 flex items-center justify-center text-center text-black font-medium transition-all duration-500 ease-out ${status === "success"
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 -translate-y-4 pointer-events-none"
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-4 pointer-events-none"
                         }`}
                 >
                     🎉 You're on the list! We'll be in touch soon.
@@ -128,8 +126,8 @@ export default function SignUpForm() {
                 {/* Error message */}
                 <div
                     className={`absolute inset-0 flex items-center justify-center text-center text-red-600 font-medium transition-all duration-500 ease-out ${status === "error"
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 -translate-y-4 pointer-events-none"
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-4 pointer-events-none"
                         }`}
                 >
                     {errorMessage}
@@ -138,8 +136,8 @@ export default function SignUpForm() {
                 {/* Signup counter */}
                 <div
                     className={`absolute inset-0 flex items-center justify-center text-center text-black/70 text-sm sm:text-base font-medium transition-all duration-500 ease-out ${status === "idle" && signupCount !== null
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-4 pointer-events-none"
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4 pointer-events-none"
                         }`}
                 >
                     <span className="inline-flex items-center gap-1.5">
