@@ -65,7 +65,7 @@ export const metadata: Metadata = {
         creator: "@clavrAI",
     },
     icons: {
-        icon: "/icon.png",
+        icon: "/favicon.png",
         apple: "/apple-icon.png",
     },
     manifest: "/manifest.json",

@@ -15,7 +15,7 @@ export default function Navigation() {
 
                     <div className="flex-1 flex justify-center md:justify-start">
                         <Image
-                            src="/logos/Clavr - Full Lockup - Black.svg"
+                            src="/logos/Clavr - Full Lockup - Black.png"
                             alt="Clavr Logo"
                             width={140}
                             height={36}

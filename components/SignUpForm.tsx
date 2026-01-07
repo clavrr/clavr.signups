@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from "framer-motion";
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBjJFxYEmKv7MmRG2tDZPaiI6iursoNM6sdKJZEVW2l7e1c4ovbYnd5tjGnrMWlUAW/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7wd382jfjZpD2o1lfAL90CtXL9slSu6GLqqPaKfhAckXY73z9wGfwrDSVyu2RS2-oA/exec";
 
 export default function SignUpForm() {
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [step, setStep] = useState<"email" | "name">("email");
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
@@ -39,6 +42,7 @@ export default function SignUpForm() {
         if (status === "success") {
             const timeout = setTimeout(() => {
                 setStatus("idle");
+                setStep("email");
             }, 3000);
             return () => clearTimeout(timeout);
         }
@@ -46,31 +50,40 @@ export default function SignUpForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
-        setStatus("idle");
-        setErrorMessage("");
 
-        try {
-            const response = await fetch(APPS_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors", // Required for Apps Script
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email }),
-            });
+        if (step === "email" && email) {
+            setStep("name");
+            return;
+        }
 
-            // With no-cors mode, we can't read the response, but if it doesn't throw, it succeeded
-            setStatus("success");
-            setEmail("");
-            // Optimistically increment count
-            setSignupCount((prev) => (prev !== null ? prev + 1 : 1));
-        } catch (error) {
-            console.error("Signup error:", error);
-            setStatus("error");
-            setErrorMessage("Something went wrong. Please try again.");
-        } finally {
-            setIsLoading(false);
+        if (step === "name" && name) {
+            setIsLoading(true);
+            setStatus("idle");
+            setErrorMessage("");
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors", // Required for Apps Script
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email, name }),
+                });
+
+                // With no-cors mode, we can't read the response, but if it doesn't throw, it succeeded
+                setStatus("success");
+                setEmail("");
+                setName("");
+                // Optimistically increment count
+                setSignupCount((prev) => (prev !== null ? prev + 1 : 1));
+            } catch (error) {
+                console.error("Signup error:", error);
+                setStatus("error");
+                setErrorMessage("Something went wrong. Please try again.");
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -83,14 +96,41 @@ export default function SignUpForm() {
             {/* Main container */}
             <div className="relative flex items-center w-full max-w-lg mx-auto bg-black/5 border border-black/5 rounded-full p-1.5 sm:p-2 backdrop-blur-xl">
                 <div className="w-4 sm:w-6 shrink-0" />
-                <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 min-w-0 h-10 sm:h-14 bg-transparent text-black text-sm sm:text-lg placeholder:text-black/60 focus:outline-none"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
+                <div className="flex-1 min-w-0 h-10 sm:h-14">
+                    <AnimatePresence mode="wait">
+                        {step === "email" ? (
+                            <motion.input
+                                key="email"
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                transition={{ duration: 0.2 }}
+                                type="email"
+                                placeholder="Enter your email"
+                                className="w-full h-full bg-transparent text-black text-sm sm:text-lg placeholder:text-black/60 focus:outline-none"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                autoFocus
+                            />
+                        ) : (
+                            <motion.input
+                                key="name"
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                transition={{ duration: 0.2 }}
+                                type="text"
+                                placeholder="Enter your name"
+                                className="w-full h-full bg-transparent text-black text-sm sm:text-lg placeholder:text-black/60 focus:outline-none"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                autoFocus
+                            />
+                        )}
+                    </AnimatePresence>
+                </div>
                 <button
                     type="submit"
                     disabled={isLoading}
@@ -106,7 +146,7 @@ export default function SignUpForm() {
                             <span className="sm:hidden">...</span>
                         </span>
                     ) : (
-                        "Get early access"
+                        step === "email" ? "Get early access" : "Confirm access"
                     )}
                 </button>
             </div>
