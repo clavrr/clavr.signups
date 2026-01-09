@@ -146,7 +146,7 @@ export default function SignUpForm() {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="h-10 sm:h-14 px-5 sm:px-10 bg-black text-white font-semibold transform-gpu text-xs sm:text-base hover:bg-black/90 transition-all duration-200 rounded-full shrink-0 shadow-lg flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
+                    className="h-10 sm:h-14 px-5 sm:px-10 bg-black text-white font-semibold transform-gpu text-sm sm:text-base hover:bg-black/90 transition-all duration-200 rounded-full shrink-0 shadow-lg flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                     {isLoading ? (
                         <span className="flex items-center gap-2">

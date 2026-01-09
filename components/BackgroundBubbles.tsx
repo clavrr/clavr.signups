@@ -65,7 +65,8 @@ export default function BackgroundBubbles({ className }: { className?: string })
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
-        const images = baseImages;
+        // On mobile, use fewer bubbles to prevent cluttering
+        const images = isMobile ? baseImages.slice(0, Math.ceil(baseImages.length * 0.6)) : baseImages;
 
         const w = window.innerWidth;
         const h = window.innerHeight;
@@ -77,7 +78,7 @@ export default function BackgroundBubbles({ className }: { className?: string })
         // - Email input bottom edge and below = bubble-free zone
         const maxY = isMobile ? h * 0.48 : h * 0.50;
 
-        // No exclusion zones needed - maxY prevents bubbles from reaching the protected text
+        // No exclusion zones - bubbles move freely within the hero area
         const textExclusionZones: { minX: number; maxX: number; minY: number; maxY: number }[] = [];
 
         screenRef.current = { w, h, isMobile, minY, maxY, textExclusionZones };
@@ -90,9 +91,9 @@ export default function BackgroundBubbles({ className }: { className?: string })
             const baseSize = isMobile ? 25 : 30;
             let size = baseSize + (i % 4) * (isMobile ? 6 : 6);
 
-            // Make Clavr Bubble images larger
+            // Make Clavr Bubble images larger (less on mobile to prevent overlap)
             if (isClavrBubble) {
-                size = Math.round(size * 1.5);
+                size = Math.round(size * (isMobile ? 1.25 : 1.5));
             }
 
             return {
@@ -124,8 +125,8 @@ export default function BackgroundBubbles({ className }: { className?: string })
             // Random direction - ensure good mix of left and right movement
             const angle = Math.random() * Math.PI * 2;
 
-            // Mobile bubbles move slower than desktop
-            const speedMultiplier = isMobile ? 0.4 : 1.0;
+            // Mobile bubbles move slightly slower but still dynamic
+            const speedMultiplier = isMobile ? 0.7 : 1.0;
             const speed = (0.5 + Math.random() * 0.5) * speedMultiplier;
 
             return {
@@ -170,11 +171,14 @@ export default function BackgroundBubbles({ className }: { className?: string })
                 const p = particles[i];
 
                 // Creative wave motion - adds organic wobble to movement
-                const waveOffset = Math.sin(frameCount * p.waveFrequency + p.phase) * p.waveAmplitude;
+                // Reduce wave intensity on mobile for smoother animation
+                const { isMobile: mobile } = screenRef.current;
+                const waveMultiplier = mobile ? 0.85 : 1.0;
+                const waveOffset = Math.sin(frameCount * p.waveFrequency + p.phase) * p.waveAmplitude * waveMultiplier;
 
                 // Move with wave influence
                 p.x += p.vx + waveOffset * 0.3;
-                p.y += p.vy + Math.cos(frameCount * p.waveFrequency * 0.7 + p.phase) * p.waveAmplitude * 0.2;
+                p.y += p.vy + Math.cos(frameCount * p.waveFrequency * 0.7 + p.phase) * p.waveAmplitude * 0.2 * waveMultiplier;
 
                 // Random gentle nudges every ~2 seconds (120 frames) to keep things interesting
                 if (frameCount % 120 === Math.floor(p.id * 4.7) % 120) {
@@ -205,29 +209,6 @@ export default function BackgroundBubbles({ className }: { className?: string })
                 } else if (p.y + p.radius > maxY) {
                     p.y = maxY - p.radius;
                     p.vy = -Math.abs(p.vy);
-                }
-
-                // Text exclusion zones for mobile
-                const { textExclusionZones, isMobile: mobile } = screenRef.current;
-                if (mobile && textExclusionZones.length > 0) {
-                    for (const zone of textExclusionZones) {
-                        const inXZone = p.x > zone.minX && p.x < zone.maxX;
-                        const inYZone = p.y > zone.minY && p.y < zone.maxY;
-
-                        if (inXZone && inYZone) {
-                            const distToTop = p.y - zone.minY;
-                            const distToBottom = zone.maxY - p.y;
-
-                            if (distToTop < distToBottom) {
-                                p.y = zone.minY - p.radius;
-                                p.vy = -Math.abs(p.vy) * 0.8;
-                            } else {
-                                p.y = zone.maxY + p.radius;
-                                p.vy = Math.abs(p.vy) * 0.8;
-                            }
-                            break;
-                        }
-                    }
                 }
 
                 // Enhanced anti-clustering: stronger repulsion when bubbles get close
