@@ -65,7 +65,7 @@ export default function SignUpForm() {
             // Validate that name is not an email
             if (looksLikeEmail(name)) {
                 setStatus("error");
-                setErrorMessage("Please enter your name, not an email address.");
+                setErrorMessage("Got the email! Now, what's your name?");
                 return;
             }
 
@@ -177,7 +177,7 @@ export default function SignUpForm() {
 
                 {/* Error message */}
                 <div
-                    className={`absolute inset-0 flex items-center justify-center text-center text-red-600 font-medium transition-all duration-500 ease-out ${status === "error"
+                    className={`absolute inset-0 flex items-center justify-center text-center text-black/70 font-medium transition-all duration-500 ease-out ${status === "error"
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-4 pointer-events-none"
                         }`}
