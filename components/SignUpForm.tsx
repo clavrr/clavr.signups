@@ -48,6 +48,11 @@ export default function SignUpForm() {
         }
     }, [status]);
 
+    // Check if a string looks like an email
+    const looksLikeEmail = (value: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -57,6 +62,13 @@ export default function SignUpForm() {
         }
 
         if (step === "name" && name) {
+            // Validate that name is not an email
+            if (looksLikeEmail(name)) {
+                setStatus("error");
+                setErrorMessage("Please enter your name, not an email address.");
+                return;
+            }
+
             setIsLoading(true);
             setStatus("idle");
             setErrorMessage("");
