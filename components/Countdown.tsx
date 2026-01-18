@@ -12,7 +12,7 @@ export default function Countdown() {
     });
 
     useEffect(() => {
-        const targetDate = new Date("2026-01-29T00:00:00");
+        const targetDate = new Date("2026-01-30T00:00:00");
 
         const updateCountdown = () => {
             const now = new Date();
