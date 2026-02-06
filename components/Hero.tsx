@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { Badge } from "@/components/ui/badge";
 import { Lock } from "lucide-react";
 import SignUpForm from "./SignUpForm";
@@ -10,6 +12,38 @@ const words = ["workflows", "daily momentum", "your next move", "decisions", "ac
 
 export default function Hero() {
     const [index, setIndex] = useState(0);
+    const badgeRef = useRef(null);
+
+    useGSAP(() => {
+        const chars = document.querySelectorAll(".meet-char");
+        const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+
+        // Initial state
+        gsap.set(chars, { y: 0, opacity: 1, filter: "blur(0px)" });
+
+        // Animate out (scatter/break)
+        tl.to(chars, {
+            y: -20,
+            x: () => gsap.utils.random(-10, 10),
+            opacity: 0,
+            filter: "blur(10px)",
+            stagger: { amount: 0.3, from: "random" },
+            duration: 0.5,
+            ease: "power2.in"
+        })
+            // Reset positions (hidden)
+            .set(chars, { y: 20, x: 0, opacity: 0, filter: "blur(10px)" })
+            // Animate in (assemble)
+            .to(chars, {
+                y: 0,
+                x: 0,
+                opacity: 1,
+                filter: "blur(0px)",
+                stagger: { amount: 0.3, from: "start" },
+                duration: 0.8,
+                ease: "back.out(1.7)"
+            });
+    }, []);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -20,18 +54,26 @@ export default function Hero() {
 
     return (
         <section className="flex flex-col items-center justify-center text-center gap-4 md:gap-8 pt-8 md:pt-20 relative w-full mb-4 md:mb-12 z-20 pointer-events-none">
-            <div className="pointer-events-auto">
-                <Badge
-                    variant="outline"
-                    className="px-4 py-1.5 text-sm border-black/10 bg-black/5 backdrop-blur-sm hover:bg-black/10 transition-all duration-300"
-                >
-                    <Lock className="w-3 h-3 mr-2 text-black/70" />
-                    Join the Private Beta
-                </Badge>
-            </div>
-
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-gradient pointer-events-auto select-none">
-                Clavr
+                <span className="relative inline-block">
+                    <div className="absolute -top-20 sm:-top-32 left-1 sm:left-2 pointer-events-auto">
+                        <Badge
+                            ref={badgeRef}
+                            variant="outline"
+                            className="px-4 py-1.5 sm:px-5 sm:py-2 text-sm sm:text-base font-medium tracking-wide rounded-full bg-white/90 backdrop-blur-xl border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-white hover:scale-105 transition-all duration-300 gap-2 items-center text-black antialiased"
+                        >
+                            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
+                            <span className="flex overflow-hidden">
+                                {"Meet".split("").map((char, i) => (
+                                    <span key={i} className="meet-char inline-block">
+                                        {char}
+                                    </span>
+                                ))}
+                            </span>
+                        </Badge>
+                    </div>
+                    Clavr
+                </span>
             </h1>
 
             <div className="text-lg sm:text-xl md:text-2xl text-muted-foreground flex flex-col sm:flex-row items-center gap-2 flex-wrap justify-center pointer-events-auto">

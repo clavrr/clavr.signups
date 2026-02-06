@@ -13,7 +13,7 @@ const XIcon = ({ className }: { className?: string }) => (
 
 export default function Footer() {
     return (
-        <footer className="w-full py-2 md:py-4 flex flex-col items-center gap-2 bg-transparent z-50 relative">
+        <footer className="w-full py-4 flex flex-col items-center gap-4 bg-white/90 backdrop-blur-sm z-50 fixed bottom-0 left-0">
             <div className="flex items-center gap-6 md:gap-10">
                 <a
                     href="https://www.linkedin.com/company/clavr-ai/"

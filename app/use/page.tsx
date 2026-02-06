@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { ArrowLeft, FileText, UserCheck, Shield, Ban, Cpu, AlertTriangle, Copyright, Globe, RefreshCw, Link2, MessageSquare, Lock, Scale, Gavel, XCircle, Bell, Mail } from "lucide-react";
 
+import Footer from "@/components/Footer";
+
 export default function TermsOfUse() {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex flex-col">
             {/* Sticky Back Button - Transparent and borderless per user request */}
-            <div className="fixed top-0 left-0 right-0 z-50 py-5 px-8 md:py-8 md:px-20 flex justify-center">
-                <div className="w-full max-w-3xl">
+            <div className="fixed top-0 left-0 right-0 z-50 py-5 px-8 md:py-8 md:px-20 flex justify-center pointer-events-none">
+                <div className="w-full max-w-3xl pointer-events-auto">
                     <Link
                         href="/"
                         className="clay-back-btn inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm px-4 py-2 transition-colors group"
@@ -19,7 +21,7 @@ export default function TermsOfUse() {
                 </div>
             </div>
 
-            <div className="pt-12 md:pt-32 pb-8 md:pb-16 px-10 md:px-8 flex flex-col items-center">
+            <div className="flex-1 pt-12 md:pt-32 pb-8 md:pb-16 px-10 md:px-8 flex flex-col items-center">
                 <div className="w-full max-w-2xl">
                     {/* Header Card */}
                     <div className="clay-card p-4 md:p-10 mb-4 md:mb-10 text-center" style={{ backgroundColor: '#ffffff' }}>
@@ -196,7 +198,7 @@ export default function TermsOfUse() {
                         </p>
                     </div>
 
-                    {/* Footer */}
+                    {/* Back Link */}
                     <div className="mt-8 md:mt-12 pt-4 md:pt-6 text-center">
                         <Link href="/" className="inline-flex items-center gap-1.5 md:gap-2 text-gray-500 hover:text-gray-900 text-xs md:text-sm transition-colors group">
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -204,6 +206,11 @@ export default function TermsOfUse() {
                         </Link>
                     </div>
                 </div>
+            </div>
+
+            {/* Footer */}
+            <div className="pb-8">
+                <Footer />
             </div>
         </main>
     );

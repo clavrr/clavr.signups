@@ -274,7 +274,7 @@ export default function BackgroundBubbles({ className }: { className?: string })
     if (!mounted || bubbleData.length === 0) return null;
 
     return (
-        <div className={`fixed inset-0 pointer-events-none overflow-hidden ${className || ''}`} style={{ zIndex: 0 }}>
+        <div className={`fixed inset-0 pointer-events-none overflow-hidden opacity-100 ${className || ''}`} style={{ zIndex: 0 }}>
             {bubbleData.map((bubble, index) => (
                 <div
                     key={index}

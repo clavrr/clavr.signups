@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -6,6 +6,12 @@ const inter = Inter({
     subsets: ["latin"],
     variable: "--font-inter",
 });
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5, // Allow zooming but keep layout stable
+};
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://clavr.me"),
@@ -71,6 +77,9 @@ export const metadata: Metadata = {
     manifest: "/manifest.json",
 };
 
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -78,8 +87,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${inter.variable} font-sans antialiased`}>
-                {children}
+            <body className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen`}>
+                <Navigation />
+                <div className="flex-1 flex flex-col w-full pb-32">
+                    {children}
+                </div>
+                <Footer />
             </body>
         </html>
     );

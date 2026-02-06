@@ -158,7 +158,7 @@ export default function SignUpForm() {
                             <span className="sm:hidden">...</span>
                         </span>
                     ) : (
-                        step === "email" ? "Get early access" : "Confirm access"
+                        step === "email" ? "Book Demo" : "Confirm Demo"
                     )}
                 </button>
             </div>
@@ -172,7 +172,7 @@ export default function SignUpForm() {
                         : "opacity-0 -translate-y-4 pointer-events-none"
                         }`}
                 >
-                    🎉 You're on the list! We'll be in touch soon.
+                    🎉 Demo request sent! We'll be in touch soon.
                 </div>
 
                 {/* Error message */}
