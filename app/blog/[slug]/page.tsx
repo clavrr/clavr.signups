@@ -13,7 +13,9 @@ const postsData = {
         category: "Revenue",
         date: "Feb 4",
         readTime: "5m",
-        author: "Anthony Maniko",
+        author: "Maniko",
+        role: "Founder & CEO, Clavr",
+        avatar: "/characters/maniko.png",
         color: "bg-orange-50",
         content: (
             <>
@@ -58,6 +60,8 @@ const postsData = {
         category: "Engineering",
         date: "Oct 08",
         author: "Mark Davis",
+        role: "Head of Engineering",
+        avatar: "👨🏻‍💻",
         readTime: "4m",
         content: <p className="text-lg text-black/60">Content coming soon...</p>
     },
@@ -97,11 +101,30 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                         {post.title}
                     </h1>
 
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm font-medium text-black/50 uppercase tracking-wide">
-                        <div className="flex items-center gap-2">
-                            <User className="w-4 h-4" />
-                            {post.author}
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 text-sm font-medium text-black/50 uppercase tracking-wide">
+                        {/* Author with Avatar */}
+                        <div className="flex items-center gap-3 text-left normal-case tracking-normal">
+                            <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-xl shrink-0 overflow-hidden relative">
+                                {post.avatar && post.avatar.startsWith('/') ? (
+                                    <img
+                                        src={post.avatar}
+                                        alt={post.author}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="pb-1">{post.avatar || "👤"}</span>
+                                )}
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-black font-bold text-base leading-none mb-1">
+                                    By {post.author}
+                                </span>
+                                <span className="text-black/40 text-xs font-medium">
+                                    {post.role}
+                                </span>
+                            </div>
                         </div>
+
                         <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             {post.date}
