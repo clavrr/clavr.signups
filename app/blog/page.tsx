@@ -29,11 +29,11 @@ const posts = [
         slug: "future-of-work-ambient",
         excerpt: "Why the next generation of tools won't look like tools at all.",
         category: "Engineering",
-        date: "Oct 08",
+        date: "Feb 6",
         readTime: "4m",
-        author: "Mark Davis",
-        role: "Head of Engineering",
-        avatar: "👨🏻‍💻",
+        author: "Maniko",
+        role: "Founder & CEO, Clavr",
+        avatar: "/characters/maniko.png",
         color: "bg-blue-50"
     },
     {
