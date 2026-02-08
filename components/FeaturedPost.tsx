@@ -4,15 +4,15 @@ import FeaturedPostClient from './FeaturedPostClient';
 
 export default async function FeaturedPost() {
     try {
-        // Get today's start (midnight)
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        // Get 24 hours ago
+        const oneDayAgo = new Date();
+        oneDayAgo.setHours(oneDayAgo.getHours() - 24);
 
-        // Fetch all posts published today
+        // Fetch posts published in the last 24 hours
         let posts = await prisma.post.findMany({
             where: {
                 status: 'published',
-                publishedAt: { gte: today }
+                publishedAt: { gte: oneDayAgo }
             },
             orderBy: { publishedAt: 'desc' },
             select: { slug: true, title: true }
