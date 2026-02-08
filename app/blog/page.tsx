@@ -216,7 +216,7 @@ export default function BlogPage() {
 
     // Helper to get avatar display
     const getAvatarDisplay = (author: Post["author"]) => {
-        if (author?.image?.startsWith('/')) {
+        if (author?.image) {
             return (
                 <Image
                     src={author.image}

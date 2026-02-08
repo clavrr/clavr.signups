@@ -385,7 +385,7 @@ export default function BlogPostPage({
                     {/* Author info */}
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-black/5 overflow-hidden relative">
-                            {displayPost.author?.image?.startsWith('/') ? (
+                            {displayPost.author?.image ? (
                                 <Image
                                     src={displayPost.author.image}
                                     alt={displayPost.author.name || "Author"}
