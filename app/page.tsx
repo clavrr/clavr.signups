@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import FeaturedActions from "@/components/FeaturedActions";
 import BackgroundBubbles from "@/components/BackgroundBubbles";
+import FeaturedPost from "@/components/FeaturedPost";
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
 
             {/* Main content - takes remaining space */}
             <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 gap-1 md:gap-4 pointer-events-none">
+                <FeaturedPost />
                 <div className="scale-[0.85] sm:scale-[0.85] md:scale-[0.9] lg:scale-[0.85] flex flex-col items-center">
                     <Hero />
                 </div>

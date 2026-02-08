@@ -2,93 +2,75 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { PostCardSkeleton } from "@/components/ui/skeleton";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Observer } from "gsap/all";
 
 gsap.registerPlugin(Observer);
 
-const posts = [
+interface Post {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    category: string | null;
+    color: string;
+    readTime: string;
+    status: string;
+    author: {
+        id: string;
+        name: string | null;
+        image: string | null;
+        title?: string;
+    };
+}
+
+// Fallback static posts for when database is not available
+const fallbackPosts = [
     {
+        id: "1",
         title: "Stop Revenue Leaks with AI",
         slug: "stop-revenue-leaks",
         excerpt: "How missed follow-ups and lost context are silently draining your Q4 pipeline.",
         category: "Revenue",
-        date: "Feb 4",
         readTime: "5m",
-        author: "Maniko",
-        role: "Founder & CEO, Clavr",
-        avatar: "/characters/maniko.png",
-        color: "bg-orange-50"
+        color: "bg-orange-50",
+        status: "published",
+        author: {
+            id: "1",
+            name: "Maniko",
+            title: "Founder & CEO, Clavr",
+            image: "/characters/maniko.png",
+        }
     },
     {
+        id: "2",
         title: "The Future of Work is Ambient",
         slug: "future-of-work-ambient",
         excerpt: "Why the next generation of tools won't look like tools at all.",
         category: "Engineering",
-        date: "Feb 6",
         readTime: "4m",
-        author: "Maniko",
-        role: "Founder & CEO, Clavr",
-        avatar: "/characters/maniko.png",
-        color: "bg-blue-50"
+        color: "bg-blue-50",
+        status: "published",
+        author: {
+            id: "1",
+            name: "Maniko",
+            image: "/characters/maniko.png",
+        }
     },
-    {
-        title: "Context Switching",
-        slug: "context-switching-cost",
-        excerpt: "The true cognitive cost of jumping between Slack, Gmail, and Linear.",
-        category: "Productivity",
-        date: "Oct 01",
-        readTime: "6m",
-        author: "Jessica Wu",
-        role: "Product Designer",
-        avatar: "👩🏻‍🎨",
-        color: "bg-emerald-50"
-    },
-    {
-        title: "Why Your CRM is Empty",
-        slug: "why-crm-is-empty",
-        excerpt: "Creating a 'shadow CRM' through email metadata works better.",
-        category: "Sales",
-        date: "Sep 28",
-        readTime: "4m",
-        author: "Alex Thompson",
-        role: "VP of Sales",
-        avatar: "👨🏼‍💼",
-        color: "bg-purple-50"
-    },
-    {
-        title: "Automating Follow-ups",
-        slug: "automating-follow-ups",
-        excerpt: "Reclaiming the 40% of your day spent routing information.",
-        category: "Workflows",
-        date: "Sep 22",
-        readTime: "3m",
-        author: "David Kim",
-        role: "Operations Lead",
-        avatar: "👨🏻‍💼",
-        color: "bg-rose-50"
-    },
-    {
-        title: "Signals vs. Noise",
-        slug: "signals-vs-noise",
-        excerpt: "Filter 100s of notifications down to the 5 that match revenue.",
-        category: "Strategy",
-        date: "Sep 15",
-        readTime: "7m",
-        author: "Emily White",
-        role: "Chief Strategy Officer",
-        avatar: "👩🏼‍💼",
-        color: "bg-gray-50"
-    }
 ];
 
 export default function BlogPage() {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+
+    // Data State
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [loading, setLoading] = useState(true);
 
     // UI State
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,14 +81,36 @@ export default function BlogPage() {
     const isAnimating = useRef(false);
     const [itemsPerPage, setItemsPerPage] = useState(2);
 
+    // Fetch posts from API
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                // Add timestamp for cache-busting on client side
+                const response = await fetch(`/api/posts?t=${Date.now()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setPosts(data);
+                } else {
+                    setPosts(fallbackPosts);
+                }
+            } catch (error) {
+                console.log("Using fallback posts");
+                setPosts(fallbackPosts);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchPosts();
+    }, []);
+
     // Filter Posts
     const filteredPosts = posts.filter(post => {
         const query = searchQuery.toLowerCase();
         return (
             post.title.toLowerCase().includes(query) ||
-            post.excerpt.toLowerCase().includes(query) ||
-            post.category.toLowerCase().includes(query) ||
-            post.author.toLowerCase().includes(query)
+            post.excerpt?.toLowerCase().includes(query) ||
+            post.category?.toLowerCase().includes(query) ||
+            post.author?.name?.toLowerCase().includes(query)
         );
     });
 
@@ -210,6 +214,22 @@ export default function BlogPage() {
     }, { scope: containerRef, dependencies: [chunks.length] });
     // Re-run observer setup if chunks length changes significantly (filtering)
 
+    // Helper to get avatar display
+    const getAvatarDisplay = (author: Post["author"]) => {
+        if (author?.image?.startsWith('/')) {
+            return (
+                <Image
+                    src={author.image}
+                    alt={author.name || "Author"}
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                />
+            );
+        }
+        return <span className="pb-1">👤</span>;
+    };
+
     return (
         <div ref={containerRef} className="min-h-screen bg-white flex flex-col overflow-hidden font-sans">
             <main className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 pt-24 pb-12">
@@ -255,7 +275,12 @@ export default function BlogPage() {
                 >
                     {/* Blog Groups (Stacked Absolute) */}
                     <div className="relative w-full h-full">
-                        {filteredPosts.length > 0 ? (
+                        {loading ? (
+                            <div className="absolute inset-0 w-full h-full flex gap-6">
+                                <PostCardSkeleton />
+                                <div className="hidden md:block flex-1"><PostCardSkeleton /></div>
+                            </div>
+                        ) : filteredPosts.length > 0 ? (
                             chunks.map((chunk, groupIndex) => (
                                 <div
                                     key={groupIndex}
@@ -264,7 +289,7 @@ export default function BlogPage() {
                                     {chunk.map((post, postIndex) => (
                                         <Link
                                             href={`/blog/${post.slug}`}
-                                            key={post.title}
+                                            key={post.id}
                                             className="flex-1 group flex flex-col gap-3 hover:scale-[1.02] transition-transform duration-500"
                                         >
                                             {/* Colored Card Area */}
@@ -296,26 +321,18 @@ export default function BlogPage() {
 
                                             {/* Footer Area (Outside Card) */}
                                             <div className="flex items-center gap-3 px-1 mt-1">
-                                                {/* Avatar (Emoji) */}
+                                                {/* Avatar */}
                                                 <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-2xl shrink-0 overflow-hidden relative">
-                                                    {post.avatar.startsWith('/') ? (
-                                                        <img
-                                                            src={post.avatar}
-                                                            alt={post.author}
-                                                            className="w-full h-full object-cover"
-                                                        />
-                                                    ) : (
-                                                        <span className="pb-1">{post.avatar}</span>
-                                                    )}
+                                                    {getAvatarDisplay(post.author)}
                                                 </div>
 
                                                 {/* Info */}
                                                 <div className="flex flex-col text-left">
                                                     <span className="text-sm font-medium text-black leading-none mb-1">
-                                                        By {post.author}
+                                                        By {post.author?.name || "Unknown"}
                                                     </span>
                                                     <span className="text-xs text-black/40 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
-                                                        {post.role}
+                                                        {post.author?.title || "Author"}
                                                     </span>
                                                 </div>
                                             </div>

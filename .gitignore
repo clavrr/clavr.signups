@@ -2,3 +2,9 @@ node_modules
 
 .next
 
+
+/lib/generated/prisma
+.env
+.env.example
+check-prisma.js
+verify-ai.ts

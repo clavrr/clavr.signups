@@ -1,5 +1,8 @@
+"use client";
+
 import { Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const XIcon = ({ className }: { className?: string }) => (
     <svg
@@ -12,6 +15,13 @@ const XIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    // Hide footer on admin pages
+    if (pathname?.startsWith("/admin")) {
+        return null;
+    }
+
     return (
         <footer className="w-full py-4 flex flex-col items-center gap-4 bg-white/90 backdrop-blur-sm z-50 fixed bottom-0 left-0">
             <div className="flex items-center gap-6 md:gap-10">

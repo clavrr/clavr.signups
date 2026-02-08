@@ -79,6 +79,8 @@ export const metadata: Metadata = {
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Providers } from "./providers";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export default function RootLayout({
     children,
@@ -86,13 +88,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen`}>
-                <Navigation />
-                <div className="flex-1 flex flex-col w-full pb-32">
-                    {children}
-                </div>
-                <Footer />
+        <html lang="en" suppressHydrationWarning>
+            <body className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen`} suppressHydrationWarning>
+                <Providers>
+                    <Navigation />
+                    <div className="flex-1 flex flex-col w-full pb-32">
+                        {children}
+                    </div>
+                    <Footer />
+                    <CookieConsent />
+                </Providers>
             </body>
         </html>
     );
