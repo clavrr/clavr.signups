@@ -205,13 +205,8 @@ function renderTiptapContent(content: any): React.ReactNode {
         switch (node.type) {
             case 'paragraph':
                 const text = renderInlineContent(node.content);
-                if (index === 0) {
-                    return (
-                        <p key={index} className="lead text-xl md:text-2xl font-medium text-black/80 mb-8 leading-relaxed">
-                            {text}
-                        </p>
-                    );
-                }
+                // Removed special styling for first paragraph to make it consistent
+                // if (index === 0) { ... }
                 return (
                     <p key={index} className="text-lg text-black/70 mb-6 leading-relaxed">
                         {text}
