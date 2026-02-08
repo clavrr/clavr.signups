@@ -372,7 +372,7 @@ export default function BlogPostPage({
                 </Link>
 
                 {/* Header */}
-                <header className="mb-12">
+                <header className="mb-12 pb-8 border-b border-black/10">
                     {displayPost.category && (
                         <span className="inline-block px-3 py-1 bg-black/5 rounded-full text-xs font-semibold text-black/60 uppercase tracking-wider mb-4">
                             {displayPost.category}
