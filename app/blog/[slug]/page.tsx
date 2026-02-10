@@ -1,11 +1,11 @@
-"use client";
 
-import { useEffect, useState, use } from "react";
-import { useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { prisma } from "@/lib/db";
 import { BlogPostSkeleton } from "@/components/ui/skeleton";
+import { isValidElement } from "react";
 
 interface Post {
     id: string;
@@ -28,7 +28,7 @@ interface Post {
 }
 
 // Fallback static posts - keep existing hardcoded content for backwards compatibility
-const fallbackPosts: Record<string, Omit<Post, 'content'> & { content: React.ReactNode }> = {
+const fallbackPosts: Record<string, Post> = {
     "stop-revenue-leaks": {
         id: "1",
         title: "Stop Revenue Leaks with AI",
@@ -277,6 +277,101 @@ const fallbackPosts: Record<string, Omit<Post, 'content'> & { content: React.Rea
             </>
         )
     },
+    "talkly-podcast": {
+        id: "4",
+        title: "Introducing TalkLY",
+        slug: "talkly-podcast",
+        excerpt: "Conversations on flow, focus, and the future of work. No hustle porn, just deep dives.",
+        category: "Podcast",
+        readTime: "3m",
+        color: "bg-purple-50",
+        status: "published",
+        publishedAt: "2026-02-10",
+        author: {
+            id: "1",
+            name: "Maniko",
+            title: "Founder & CEO, Clavr",
+            image: "/characters/maniko.png",
+        },
+        content: {
+            type: 'doc',
+            content: [
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "We spend so much time building tools for productivity, but rarely do we stop to talk about the *why*. Why do we work the way we do? Why is burnout the default setting for high performers?",
+                        },
+                    ],
+                },
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "Software is only half the battle. The other half is the mindset, the culture, and the human operating system that drives it all.",
+                        },
+                    ],
+                },
+                {
+                    type: 'heading',
+                    attrs: { level: 2 },
+                    content: [{ type: 'text', text: 'Conversations on Flow & Focus' }],
+                },
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "That's why we're launching TalkLY. It's a new podcast where we peel back the layers of modern work. No hustle porn. No \"crushing it\" at 4 AM. Just honest, deep conversations about how to build meaningful things without losing your soul.",
+                        },
+                    ],
+                },
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "We're talking to founders, creators, and thinkers who are redefining what it means to be productive. We explore their workflows, their struggles with distraction, and the systems they use to find flow in a noisy world.",
+                        },
+                    ],
+                },
+                {
+                    type: 'blockquote',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "\"Productivity isn't about doing more things. It's about doing the right things, with clarity and intent.\"",
+                        },
+                    ],
+                },
+                {
+                    type: 'heading',
+                    attrs: { level: 2 },
+                    content: [{ type: 'text', text: 'Listen Now' }],
+                },
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "The first episodes are live. Join us as we explore the future of work, one conversation at a time.",
+                        },
+                    ],
+                },
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: "Search for \"TalkLY by Clavr\" wherever you get your podcasts.",
+                        },
+                    ],
+                },
+            ]
+        }
+    },
 };
 
 // Render Tiptap JSON content to React elements
@@ -384,63 +479,70 @@ function renderInlineContent(content: any[]): React.ReactNode {
     });
 }
 
-export default function BlogPostPage({
+async function getPost(slug: string): Promise<Post | null> {
+    try {
+        const post = await prisma.post.findUnique({
+            where: { slug },
+            include: {
+                author: {
+                    select: {
+                        id: true,
+                        name: true,
+                        image: true,
+                        title: true,
+                    },
+                },
+            },
+        });
+
+        if (post) {
+            return {
+                id: post.id,
+                title: post.title,
+                slug: post.slug,
+                excerpt: post.excerpt,
+                content: post.content,
+                category: post.category,
+                color: post.color,
+                readTime: post.readTime,
+                status: post.status,
+                publishedAt: post.publishedAt?.toISOString() || null,
+                author: {
+                    id: post.author.id,
+                    name: post.author.name,
+                    image: post.author.image,
+                    title: post.author.title || undefined,
+                }
+            };
+        }
+
+        return null;
+    } catch (error) {
+        console.error("Failed to fetch post:", error);
+        return null;
+    }
+}
+
+export default async function BlogPostPage({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { slug } = use(params);
-    const router = useRouter();
-    const [post, setPost] = useState<Post | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [useFallback, setUseFallback] = useState(false);
+    const { slug } = await params;
 
-    useEffect(() => {
-        async function fetchPost() {
-            try {
-                // Add timestamp for cache-busting
-                const response = await fetch(`/api/posts/${slug}?t=${Date.now()}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setPost(data);
-                } else {
-                    router.push("/blog");
-                }
-            } catch (error) {
-                if (fallbackPosts[slug]) {
-                    setUseFallback(true);
-                } else {
-                    router.push("/blog");
-                }
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchPost();
-    }, [slug, router]);
+    // First try to get from database
+    let post = await getPost(slug);
 
-    if (loading) {
-        return <BlogPostSkeleton />;
+    // If not in DB, check fallbacks
+    if (!post && fallbackPosts[slug]) {
+        post = fallbackPosts[slug];
     }
 
-    // Use fallback content if database not available
-    const fallbackPost = fallbackPosts[slug];
-    const displayPost = useFallback ? fallbackPost : post;
-
-    if (!displayPost) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-                <h1 className="text-2xl font-bold">Post not found</h1>
-                <Link href="/blog" className="text-blue-600 hover:underline">
-                    Back to blog
-                </Link>
-            </div>
-        );
+    if (!post) {
+        notFound();
     }
 
-    const authorRole = useFallback
-        ? (fallbackPost.author as any).role
-        : displayPost.author?.title || displayPost.author?.role || "Author";
+    const authorRole = post.author?.title || post.author?.role || "Author";
 
     return (
         <div className="min-h-screen bg-white">
@@ -456,22 +558,22 @@ export default function BlogPostPage({
 
                 {/* Header */}
                 <header className="mb-12 pb-8 border-b border-black/10">
-                    {displayPost.category && (
+                    {post.category && (
                         <span className="inline-block px-3 py-1 bg-black/5 rounded-full text-xs font-semibold text-black/60 uppercase tracking-wider mb-4">
-                            {displayPost.category}
+                            {post.category}
                         </span>
                     )}
                     <h1 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight">
-                        {displayPost.title}
+                        {post.title}
                     </h1>
 
                     {/* Author info */}
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-black/5 overflow-hidden relative">
-                            {displayPost.author?.image ? (
+                            {post.author?.image ? (
                                 <Image
-                                    src={displayPost.author.image}
-                                    alt={displayPost.author.name || "Author"}
+                                    src={post.author.image}
+                                    alt={post.author.name || "Author"}
                                     fill
                                     className="object-cover"
                                     sizes="48px"
@@ -484,20 +586,20 @@ export default function BlogPostPage({
                         </div>
                         <div className="flex flex-col text-left">
                             <span className="text-lg font-bold text-black leading-none mb-1">
-                                {displayPost.author?.name || "Anthony Maniko"}
+                                {post.author?.name || "Anthony Maniko"}
                             </span>
                             <div className="flex items-center gap-2 text-black/40 text-sm font-medium">
                                 <span>{authorRole}</span>
                                 <span>•</span>
                                 <span>
-                                    {displayPost.publishedAt ? new Date(displayPost.publishedAt).toLocaleDateString('en-US', {
+                                    {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
                                         month: 'short',
                                         day: 'numeric',
                                         year: 'numeric'
                                     }) : 'Recently'}
                                 </span>
                                 <span>•</span>
-                                <span>{displayPost.readTime} read</span>
+                                <span>{post.readTime} read</span>
                             </div>
                         </div>
                     </div>
@@ -505,9 +607,9 @@ export default function BlogPostPage({
 
                 {/* Content */}
                 <div className="prose prose-lg max-w-none">
-                    {useFallback
-                        ? fallbackPost.content
-                        : renderTiptapContent(displayPost?.content)}
+                    {isValidElement(post.content)
+                        ? post.content
+                        : renderTiptapContent(post.content)}
                 </div>
 
                 {/* Footer */}
