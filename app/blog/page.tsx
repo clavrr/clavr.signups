@@ -48,6 +48,22 @@ const fallbackPosts = [
         }
     },
     {
+        id: "3",
+        title: "Context Switching",
+        slug: "context-switching",
+        excerpt: "The true cognitive cost of jumping between Slack, Gmail, and Linear.",
+        category: "Productivity",
+        readTime: "6m",
+        color: "bg-green-50",
+        status: "published",
+        author: {
+            id: "1",
+            name: "Maniko",
+            title: "Founder & CEO, Clavr",
+            image: "/characters/maniko.png",
+        }
+    },
+    {
         id: "2",
         title: "The Future of Work is Ambient",
         slug: "future-of-work-ambient",

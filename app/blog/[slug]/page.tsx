@@ -195,6 +195,88 @@ const fallbackPosts: Record<string, Omit<Post, 'content'> & { content: React.Rea
             </>
         )
     },
+    "context-switching": {
+        id: "3",
+        title: "Context Switching",
+        excerpt: "The true cognitive cost of jumping between Slack, Gmail, and Linear.",
+        category: "Productivity",
+        slug: "context-switching",
+        readTime: "6m",
+        status: "published",
+        publishedAt: "2026-02-09",
+        color: "bg-green-50",
+        author: {
+            id: "1",
+            name: "Maniko",
+            image: "/characters/maniko.png",
+            role: "Founder & CEO, Clavr"
+        },
+        content: (
+            <>
+                <p className="lead text-xl md:text-2xl font-medium text-black/80 mb-8 leading-relaxed">
+                    We've all been there. You're in the zone, deep in a problem, and ping! A notification pulls you away. You check it, reply, and then... what were you doing again? That focused state is gone, and getting it back takes way longer than the distraction itself.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    This constant jumping between apps like Email, Calendar, Todos, Linear, Asana, Notion, and Slack is the biggest drain on modern productivity. Your brain isn't wired to swap contexts every forty seconds. It needs continuity.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    It feels like part of the job, but the actual cost is staggering. Research shows the average knowledge worker switches apps over 1,200 times every single day. That's once every 24 seconds.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Every one of those switches levies a tax. Studies suggest it takes about 23 minutes to fully regain deep focus after a distraction. When you do the math, it means most of us spend a huge chunk of our day just trying to remember what we were doing.
+                </p>
+
+                <blockquote className="border-l-4 border-black pl-6 my-8 italic text-xl text-black/60">
+                    "We are not multitasking. We are just doing multiple things badly, and slowly."
+                </blockquote>
+
+                <h2 className="text-2xl font-bold text-black mt-10 mb-4">The Cognitive Cost</h2>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    This phenomenon is called Attention Residue. When you jump from a sales call to a code review, your brain doesn't cut over cleanly. A part of your attention remains stuck on the last task. By 2 PM, you're exhausted not because you did too much work, but because your brain has been running a marathon of context switches.
+                </p>
+
+                <h2 className="text-2xl font-bold text-black mt-10 mb-4">Meet Your Proactive Coworker</h2>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Solving this doesn't mean building another dashboard you have to manage. It means having an intelligent system that works for you.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Clavr isn't just a passive tool. It is a proactive AI coworker. While you focus on the deep work only you can do, Clavr is in the background, connecting the dots between your chats, documents, and meetings.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Need to know where a project stands? You don't have to play archaeologist across five different apps. You simply talk to Clavr in natural language, just like you would a teammate. "What's the latest on the Q3 roadmap?" "Did we send that contract to Acme?"
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    It answers instantly with full context because it's been paying attention the whole time. It brings the information to you so you never have to pay the toggle tax again.
+                </p>
+
+                <blockquote className="border-l-4 border-black pl-6 my-8 italic text-xl text-black/60">
+                    "The goal is to make the technology disappear, so you can just focus on the work."
+                </blockquote>
+
+                <h2 className="text-2xl font-bold text-black mt-10 mb-4">Stop the Toggle Tax</h2>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    That is why we built Clavr. We wanted to stop the toggle tax. Instead of forcing you to be the bridge between your tools, Clavr acts as the intelligent layer that connects them all.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Imagine looking at a customer profile and instantly seeing everything: the latest emails, the active engineering tickets, the signed contracts, and the upcoming calendar invites. You don't have to open four different tabs and search four different times. The context is just there, waiting for you.
+                </p>
+
+                <p className="text-lg text-black/70 mb-6 leading-relaxed">
+                    Clavr does the heavy lifting of connecting the dots across your digital life. It turns a fragmented mess of apps into a coherent stream of work, so you can stop switching contexts and start actually finishing things.
+                </p>
+            </>
+        )
+    },
 };
 
 // Render Tiptap JSON content to React elements
@@ -432,7 +514,7 @@ export default function BlogPostPage({
                 <footer className="mt-16 pt-8 border-t border-black/10 flex justify-start">
                     <Link
                         href="/blog"
-                        className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-50 hover:bg-gray-100 text-black/70 hover:text-black border border-black/5 hover:border-black/10 transition-all duration-300 ease-out"
+                        className="group inline-flex items-center gap-2 py-2 text-black/40 hover:text-black transition-colors duration-300"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
                         <span className="font-medium text-sm">More articles</span>
